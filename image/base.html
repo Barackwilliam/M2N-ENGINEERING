@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M2N ENGINEERING • FUTURISTIC ELECTRICAL CONTRACTORS TANZANIA</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@300;400;500;600;700&family=Archivo:wght@300;400;500;600;700&family=Plein:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Futuristic Color Palette */
+            --primary-900: #0B1026;
+            --primary-800: #131B3A;
+            --primary-700: #1C264F;
+            --primary-600: #253164;
+            --primary-500: #2E3C79;
+            
+            --neon-500: #00F0FF;
+            --neon-400: #2EF0FF;
+            --neon-300: #5EF4FF;
+            --neon-200: #8EF8FF;
+            --neon-100: #BEFCFF;
+            
+            --gold-500: #FFD700;
+            --gold-400: #FFDE33;
+            --gold-300: #FFE566;
+            --gold-200: #FFED99;
+            --gold-100: #FFF6CC;
+            
+            --dark-900: #0A0C14;
+            --dark-800: #12141C;
+            --dark-700: #1A1C24;
+            --dark-600: #22242C;
+            
+            --white: #FFFFFF;
+            --white-100: #F8FAFC;
+            --white-200: #F1F5F9;
+            
+            /* Gradients */
+            --gradient-aurora: linear-gradient(135deg, var(--primary-800) 0%, var(--primary-600) 50%, var(--primary-900) 100%);
+            --gradient-neon: linear-gradient(135deg, var(--neon-500) 0%, var(--gold-500) 100%);
+            --gradient-cosmic: radial-gradient(circle at 30% 30%, var(--neon-500), var(--primary-700));
+            
+            /* Shadows */
+            --shadow-neon: 0 0 20px rgba(0, 240, 255, 0.3);
+            --shadow-neon-strong: 0 0 40px rgba(0, 240, 255, 0.5);
+            --shadow-gold: 0 0 20px rgba(255, 215, 0, 0.3);
+            
+            /* Dimensions */
+            --sidebar-width: 320px;
+            --sidebar-collapsed: 100px;
+            --top-bar-height: 80px;
+            
+            /* Borders */
+            --radius-xs: 8px;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-900);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* =============================================
+            FUTURISTIC BACKGROUND
+        ============================================= */
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: orb-float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-orb-1 { top: -200px; right: -200px; }
+        .glow-orb-2 { bottom: -200px; left: -200px; background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%); }
+
+        @keyframes orb-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.2); }
+            66% { transform: translate(-100px, 100px) scale(0.8); }
+        }
+
+        /* =============================================
+            SIDEBAR NAVIGATION - FUTURISTIC
+        ============================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: var(--sidebar-width);
+            background: rgba(10, 12, 20, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-xl);
+            padding: 2rem 0;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-neon);
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-500), var(--gold-500), transparent);
+            animation: border-flow 3s linear infinite;
+        }
+
+        @keyframes border-flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed);
+        }
+
+        .sidebar-header {
+            padding: 0 2rem 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-3d {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: logo-spin 10s linear infinite;
+        }
+
+        @keyframes logo-spin {
+            from { transform: rotateY(0deg) rotateX(10deg); }
+            to { transform: rotateY(360deg) rotateX(10deg); }
+        }
+
+        .logo-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--neon-500), var(--gold-500));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--dark-900);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .logo-face.front { transform: translateZ(30px); }
+        .logo-face.back { transform: rotateY(180deg) translateZ(30px); }
+        .logo-face.right { transform: rotateY(90deg) translateZ(30px); }
+        .logo-face.left { transform: rotateY(-90deg) translateZ(30px); }
+        .logo-face.top { transform: rotateX(90deg) translateZ(30px); }
+        .logo-face.bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+        .logo-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .logo-text {
+            opacity: 0;
+            display: none;
+        }
+
+        .logo-text h2 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--neon-400), var(--gold-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--neon-300);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .toggle-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-500);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-500);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toggle-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--neon-500);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toggle-btn:hover::before {
+            opacity: 0.2;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            padding: 2rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            color: var(--white-200);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            transform: translateX(0);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            border-color: var(--neon-500);
+            box-shadow: var(--shadow-neon);
+            color: var(--neon-500);
+            transform: translateX(10px);
+        }
+
+        .nav-link i {
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+            color: var(--neon-500);
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-link span {
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar.collapsed .nav-link span {
+            opacity: 0;
+            display: none;
+        }
+
+        .nav-badge {
+            background: var(--gradient-neon);
+            color: var(--dark-900);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-full);
+            margin-left: auto;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar.collapsed .nav-badge {
+            display: none;
+        }
+
+        /* Sidebar Footer */
+        .sidebar-footer {
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .sidebar-footer .nav-link {
+            padding: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: rgba(0, 240, 255, 0.05);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-500);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-500);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* =============================================
+            MAIN CONTENT
+        ============================================= */
+
+        .main-content {
+            margin-left: calc(var(--sidebar-width) + 2rem);
+            transition: margin-left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .main-content.expanded {
+            margin-left: calc(var(--sidebar-collapsed) + 2rem);
+        }
+
+        /* =============================================
+            SECTIONS - FUTURISTIC
+        ============================================= */
+
+        section {
+            min-height: 100vh;
+            padding: 4rem;
+            margin-bottom: 2rem;
+            background: rgba(10, 12, 20, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-neon);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            display: inline-block;
+            font-family: 'Plein', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--neon-500);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .section-subtitle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 2rem;
+            height: 2px;
+            background: var(--neon-500);
+            transform: translateY(-50%);
+        }
+
+        .section-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--white);
+        }
+
+        .section-title span {
+            display: block;
+            background: linear-gradient(135deg, var(--neon-400), var(--gold-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* =============================================
+            HOME SECTION - SPECTACULAR
+        ============================================= */
+
+        .hero {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-500);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-full);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, var(--neon-500), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .hero-badge i {
+            color: var(--neon-500);
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(4rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero-title-word {
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-title-word span {
+            display: block;
+            animation: slide-up 1s ease forwards;
+        }
+
+        @keyframes slide-up {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .glitch {
+            position: relative;
+            color: var(--white);
+            font-size: inherit;
+            animation: glitch 3s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-900);
+        }
+
+        .glitch::before {
+            color: var(--neon-500);
+            z-index: -1;
+            animation: glitch-offset 0.3s infinite;
+        }
+
+        .glitch::after {
+            color: var(--gold-500);
+            z-index: -2;
+            animation: glitch-offset 0.2s infinite reverse;
+        }
+
+        @keyframes glitch-offset {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--white-200);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--neon-500);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: var(--neon-500);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--neon-500), var(--gold-500));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .stat-card:hover::after {
+            opacity: 0.1;
+        }
+
+        .stat-number {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--neon-400), var(--gold-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--white-200);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* =============================================
+            SERVICES SECTION - GRID FANTASTIC
+        ============================================= */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--neon-500), var(--gold-500));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            border-color: var(--neon-500);
+            box-shadow: var(--shadow-neon-strong);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-500);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--neon-500);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--neon-500);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--neon-500);
+            color: var(--dark-900);
+        }
+
+        .service-card:hover .service-icon::before {
+            opacity: 0.2;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .service-card p {
+            color: var(--white-200);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-tag {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            color: var(--neon-300);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .service-tag:hover {
+            background: var(--neon-500);
+            color: var(--dark-900);
+            transform: scale(1.05);
+        }
+
+        /* =============================================
+            PROJECTS SECTION - CINEMATIC
+        ============================================= */
+
+        .projects-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 400px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .project-card.featured {
+            grid-column: span 2;
+            height: 500px;
+        }
+
+        .project-card:hover {
+            border-color: var(--neon-500);
+            box-shadow: var(--shadow-neon-strong);
+            transform: scale(1.02);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.7);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+            filter: brightness(0.5);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,240,255,0.2) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-category {
+            color: var(--neon-500);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-location {
+            color: var(--white-200);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* =============================================
+            ABOUT SECTION - ELEGANT
+        ============================================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--white-200);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .about-feature:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--neon-500);
+            transform: translateX(10px);
+        }
+
+        .about-feature i {
+            color: var(--neon-500);
+            font-size: 1.2rem;
+        }
+
+        .about-feature span {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .credentials-card {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--neon-500);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credentials-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--neon-500), var(--gold-500));
+            opacity: 0.1;
+        }
+
+        .credential-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .credential-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 240, 255, 0.2);
+            border: 1px solid var(--neon-500);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-500);
+            font-size: 1.2rem;
+        }
+
+        .credential-info h4 {
+            color: var(--neon-500);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .credential-info p {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* =============================================
+            CONTACT SECTION - INTERACTIVE
+        ============================================= */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-card {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--neon-500);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-500);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--neon-500);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--neon-500);
+            color: var(--dark-900);
+            transform: rotate(360deg);
+        }
+
+        .contact-details h4 {
+            color: var(--neon-500);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details p,
+        .contact-details a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .contact-details a:hover {
+            color: var(--neon-500);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-md);
+            color: var(--white);
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-500);
+            box-shadow: var(--shadow-neon);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 1.5rem;
+            top: 1.2rem;
+            color: var(--white-300);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            background: transparent;
+            padding: 0 0.5rem;
+        }
+
+        .form-group input:focus ~ label,
+        .form-group select:focus ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group input:valid ~ label,
+        .form-group select:valid ~ label,
+        .form-group textarea:valid ~ label {
+            top: -0.6rem;
+            left: 1rem;
+            font-size: 0.8rem;
+            background: var(--dark-800);
+            color: var(--neon-500);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-500), var(--gold-500));
+            color: var(--dark-900);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-neon-strong);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--neon-500);
+            color: var(--neon-500);
+        }
+
+        .btn-outline:hover {
+            background: var(--neon-500);
+            color: var(--dark-900);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-wa:hover {
+            background: #20bd5a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-shape {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .shape-1 {
+            top: 10%;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--neon-500);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+            opacity: 0.1;
+        }
+
+        .shape-2 {
+            bottom: 10%;
+            left: 5%;
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--gold-500);
+            transform: rotate(45deg);
+            animation: float 10s ease-in-out infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(45deg); }
+            50% { transform: translateY(-50px) rotate(45deg); }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-500);
+            border-radius: var(--radius-full);
+            color: var(--neon-500);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* WhatsApp FAB */
+        .wa-fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: pulse-wa 2s infinite;
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .wa-fab:hover {
+            transform: scale(1.2) rotate(360deg);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(calc(-100% - 2rem));
+                left: 0;
+                top: 0;
+                transform: translateY(0) translateX(-100%);
+                height: 100vh;
+                border-radius: 0;
+                border-right: 1px solid var(--neon-500);
+            }
+
+            .sidebar.mobile-visible {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .projects-showcase,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card.featured {
+                grid-column: auto;
+            }
+
+            section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark-900);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-3d {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: loader-spin 3s linear infinite;
+        }
+
+        .loader-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--neon-500), var(--gold-500));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--dark-900);
+            box-shadow: var(--shadow-neon-strong);
+        }
+
+        .loader-face.front { transform: translateZ(50px); }
+        .loader-face.back { transform: rotateY(180deg) translateZ(50px); }
+        .loader-face.right { transform: rotateY(90deg) translateZ(50px); }
+        .loader-face.left { transform: rotateY(-90deg) translateZ(50px); }
+        .loader-face.top { transform: rotateX(90deg) translateZ(50px); }
+        .loader-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        @keyframes loader-spin {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-3d">
+            <div class="loader-face front">M</div>
+            <div class="loader-face back">2</div>
+            <div class="loader-face right">N</div>
+            <div class="loader-face left">⚡</div>
+            <div class="loader-face top">E</div>
+            <div class="loader-face bottom">⚡</div>
+        </div>
+    </div>
+
+    <!-- Background Elements -->
+    <div id="canvas-container"></div>
+    <div class="cyber-grid"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bolt"></i>
+    </button>
+
+    <!-- Futuristic Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-3d">
+                    <div class="logo-face front">M</div>
+                    <div class="logo-face back">2</div>
+                    <div class="logo-face right">N</div>
+                    <div class="logo-face left">⚡</div>
+                    <div class="logo-face top">E</div>
+                    <div class="logo-face bottom">⚡</div>
+                </div>
+                <div class="logo-text">
+                    <h2>M2N ENGINEERING</h2>
+                    <p>ELECTRICAL CONTRACTORS</p>
+                </div>
+            </div>
+            <div class="toggle-btn" id="toggleSidebar">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#home" class="nav-link active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#about" class="nav-link" data-section="about">
+                    <i class="fas fa-building"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#services" class="nav-link" data-section="services">
+                    <i class="fas fa-bolt"></i>
+                    <span>SERVICES</span>
+                    <span class="nav-badge">21</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#projects" class="nav-link" data-section="projects">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>PROJECTS</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link" data-section="contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>CONTACT</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Available for projects</span>
+            </div>
+            <div class="nav-link" style="cursor: default;">
+                <i class="fas fa-phone-alt"></i>
+                <span>+255 629 625 288</span>
+            </div>
+            <div class="nav-link" style="cursor: default;">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Kilombero, Morogoro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        
+        <!-- HOME SECTION - FUTURISTIC HERO -->
+        <section id="home" class="hero">
+            <div class="section-container">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>CRB CLASS V · BRELA INCORPORATED</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="hero-title-word"><span>POWERING</span></span>
+                    <span class="hero-title-word"><span class="glitch" data-text="TANZANIA'S">TANZANIA'S</span></span>
+                    <span class="hero-title-word"><span>FUTURE</span></span>
+                </h1>
+
+                <p class="hero-description">
+                    M2N Engineering is a visionary electrical contracting company based in Kilombero, Morogoro. We deliver next-generation electrical solutions with unparalleled expertise and futuristic technology.
+                </p>
+
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        START PROJECT
+                    </a>
+                    <a href="#services" class="btn btn-outline">
+                        <i class="fas fa-eye"></i>
+                        EXPLORE SERVICES
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">33kV</div>
+                        <div class="stat-label">HIGH VOLTAGE</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">PROJECTS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">CRB V</div>
+                        <div class="stat-label">CLASS FIVE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">ABOUT US</span>
+                    <h2 class="section-title">
+                        ENGINEERING<br>
+                        <span>EXCELLENCE</span>
+                    </h2>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>
+                            Founded in 2022, M2N Engineering has rapidly established itself as a premier electrical contractor in Tanzania. Based in Kilombero, Morogoro, we combine local expertise with global standards to deliver exceptional electrical solutions.
+                        </p>
+                        <p>
+                            Our team of certified engineers and technicians brings decades of combined experience across residential, commercial, and industrial projects. We don't just complete projects – we create lasting partnerships built on trust, quality, and innovation.
+                        </p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-certificate"></i>
+                                <span>CRB Class V Registered</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-file-alt"></i>
+                                <span>BRELA Incorporated</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-id-card"></i>
+                                <span>TIN: 192-412-951</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Licensed Until 2027</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="credentials-card">
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-tower-cell"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>HIGH VOLTAGE</h4>
+                                <p>33kV Certified</p>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>EXPERIENCE</h4>
+                                <p>4+ Years Excellence</p>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>TEAM</h4>
+                                <p>15+ Professionals</p>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>COVERAGE</h4>
+                                <p>Nationwide Tanzania</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">OUR SERVICES</span>
+                    <h2 class="section-title">
+                        COMPREHENSIVE<br>
+                        <span>SOLUTIONS</span>
+                    </h2>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>CCTV Installation</h3>
+                        <p>Advanced surveillance systems with AI analytics, night vision, and remote monitoring capabilities.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">HD Cameras</span>
+                            <span class="service-tag">AI Analytics</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Electric Fence</h3>
+                        <p>High-security perimeter systems with real-time alerts and tamper-proof technology.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">High Voltage</span>
+                            <span class="service-tag">Smart Alerts</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Gate Motors</h3>
+                        <p>Automated gate systems with remote access, safety sensors, and backup power.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Remote Control</span>
+                            <span class="service-tag">Smart Access</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Troubleshooting</h3>
+                        <p>Expert diagnostics and rapid fault resolution for all electrical systems.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Diagnostics</span>
+                            <span class="service-tag">24/7 Support</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Maintenance</h3>
+                        <p>Preventive and corrective maintenance programs for optimal performance.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Preventive</span>
+                            <span class="service-tag">Corrective</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3>Water Pumps</h3>
+                        <p>Professional installation and servicing of water pumping systems.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Submersible</span>
+                            <span class="service-tag">Surface Pumps</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Residential Wiring</h3>
+                        <p>Complete electrical wiring for modern homes with smart home integration.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">New Builds</span>
+                            <span class="service-tag">Rewiring</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3>Industrial Wiring</h3>
+                        <p>Complex industrial electrical systems and control panel installations.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">3-Phase</span>
+                            <span class="service-tag">Control Panels</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-draw-polygon"></i>
+                        </div>
+                        <h3>Architecture</h3>
+                        <p>Professional architectural design with integrated electrical planning.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Design</span>
+                            <span class="service-tag">Consulting</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tower-cell"></i>
+                        </div>
+                        <h3>HT/LT Poles</h3>
+                        <p>Construction of high and low tension power distribution poles.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">33kV</span>
+                            <span class="service-tag">Distribution</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-charging-station"></i>
+                        </div>
+                        <h3>Transformers</h3>
+                        <p>Expert installation and commissioning of power transformers.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Installation</span>
+                            <span class="service-tag">Testing</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-redo-alt"></i>
+                        </div>
+                        <h3>Motor Rewinding</h3>
+                        <p>Professional rewinding and refurbishment of electric motors.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">AC/DC</span>
+                            <span class="service-tag">Repair</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Wholesale Supply</h3>
+                        <p>Quality electrical materials and equipment at competitive prices.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Materials</span>
+                            <span class="service-tag">Equipment</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3>Contracting</h3>
+                        <p>Full-service electrical contracting for all project scales.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">CRB V</span>
+                            <span class="service-tag">Licensed</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3>Plumbing</h3>
+                        <p>Professional plumbing installation and maintenance services.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Water</span>
+                            <span class="service-tag">Drainage</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cable-car"></i>
+                        </div>
+                        <h3>Cable Termination</h3>
+                        <p>Professional cable termination and testing for all voltage levels.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">LV/MV/HV</span>
+                            <span class="service-tag">Testing</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <h3>Oil Station Pumps</h3>
+                        <p>Specialized installation of fuel dispensing systems.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Fuel Pumps</span>
+                            <span class="service-tag">Dispensers</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <h3>Solar Power</h3>
+                        <p>Complete solar energy solutions with battery backup systems.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Grid-tie</span>
+                            <span class="service-tag">Off-grid</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                        <h3>Backup Systems</h3>
+                        <p>UPS, generators, and inverter systems for uninterrupted power.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Generators</span>
+                            <span class="service-tag">UPS</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-street-view"></i>
+                        </div>
+                        <h3>Street Lighting</h3>
+                        <p>LED and solar street lighting for public and private spaces.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">LED</span>
+                            <span class="service-tag">Solar</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Civil Construction</h3>
+                        <p>Civil works related to electrical infrastructure projects.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">Foundations</span>
+                            <span class="service-tag">Trenching</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">PORTFOLIO</span>
+                    <h2 class="section-title">
+                        FEATURED<br>
+                        <span>PROJECTS</span>
+                    </h2>
+                </div>
+
+                <div class="projects-showcase">
+                    <div class="project-card featured">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=85" alt="33kV Substation" class="project-image">
+                        <div class="project-overlay">
+                            <span class="project-category">HIGH VOLTAGE</span>
+                            <h3 class="project-title">33kV Substation & Recloser</h3>
+                            <p class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Kilombero, Morogoro
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1581093458791-9d42e3c2fd2e?w=800&q=85" alt="Transformer" class="project-image">
+                        <div class="project-overlay">
+                            <span class="project-category">POWER DISTRIBUTION</span>
+                            <h3 class="project-title">Transformer Commissioning</h3>
+                            <p class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ifakara, Morogoro
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85" alt="Power Lines" class="project-image">
+                        <div class="project-overlay">
+                            <span class="project-category">LINE CONSTRUCTION</span>
+                            <h3 class="project-title">MV Distribution Line</h3>
+                            <p class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Morogoro Region
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">CONNECT</span>
+                    <h2 class="section-title">
+                        START YOUR<br>
+                        <span>JOURNEY</span>
+                    </h2>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3 style="font-size: 2rem; margin-bottom: 2rem; font-family: 'Clash Display';">CONTACT INFO</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>LOCATION</h4>
+                                <p>Mkamba Street, Kidatu Ward, Kilombero, Morogoro, Tanzania</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>PHONE / WHATSAPP</h4>
+                                <a href="tel:+255629625288">+255 629 625 288</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>EMAIL</h4>
+                                <a href="mailto:info@m2nengineering.co.tz">info@m2nengineering.co.tz</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>WORKING HOURS</h4>
+                                <p>Mon-Fri: 8:00 - 17:00 | Sat: 8:00 - 13:00</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0,240,255,0.05); border-radius: var(--radius-md); border: 1px solid var(--neon-500);">
+                            <p style="color: var(--neon-300); font-size: 0.9rem;">
+                                <i class="fas fa-shield-alt" style="margin-right: 0.5rem;"></i>
+                                CRB Class V · BRELA #192412951 · TIN: 192-412-951
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3 style="font-size: 2rem; margin-bottom: 2rem; font-family: 'Clash Display';">SEND INQUIRY</h3>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" required>
+                                <label>Full Name *</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="tel" id="phone" required>
+                                <label>Phone / WhatsApp *</label>
+                            </div>
+
+                            <div class="form-group">
+                                <select id="service" required>
+                                    <option value="" disabled selected></option>
+                                    <option>CCTV Camera Installation</option>
+                                    <option>Electric Fence Installation</option>
+                                    <option>Gate Motor Installation</option>
+                                    <option>Troubleshooting</option>
+                                    <option>Electrical Maintenance</option>
+                                    <option>Water Pump Installation</option>
+                                    <option>Residential Wiring</option>
+                                    <option>Industrial Wiring</option>
+                                    <option>Architecture</option>
+                                    <option>HT/LT Pole Construction</option>
+                                    <option>Transformer Installation</option>
+                                    <option>Motor Rewinding</option>
+                                    <option>Wholesale Electrical Products</option>
+                                    <option>Electrical Contractor</option>
+                                    <option>Plumbing Works</option>
+                                    <option>Cable Termination</option>
+                                    <option>Oil Station Pump Installation</option>
+                                    <option>Solar Power Installation</option>
+                                    <option>Backup System Installation</option>
+                                    <option>Street Lighting Installation</option>
+                                    <option>Civil Construction</option>
+                                </select>
+                                <label>Service Required *</label>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea id="message" required></textarea>
+                                <label>Project Details *</label>
+                            </div>
+
+                            <button type="button" class="btn btn-wa" onclick="sendWhatsApp()">
+                                <i class="fab fa-whatsapp"></i>
+                                SEND VIA WHATSAPP
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- WhatsApp FAB -->
+    <a href="https://wa.me/255629625288?text=Hello%20M2N%20Engineering!%20I'm%20interested%20in%20your%20electrical%20services." class="wa-fab" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            
+            const icon = toggleBtn.querySelector('i');
+            if (sidebar.classList.contains('collapsed')) {
+                icon.className = 'fas fa-chevron-right';
+            } else {
+                icon.className = 'fas fa-chevron-left';
+            }
+        });
+
+        // Mobile menu
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-visible');
+        });
+
+        // Close sidebar on outside click (mobile)
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-section');
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    gsap.to(window, {
+                        duration: 1.5,
+                        scrollTo: {
+                            y: targetSection,
+                            offsetY: 0
+                        },
+                        ease: "power4.inOut"
+                    });
+                }
+                
+                if (window.innerWidth <= 992) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            });
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate sections on scroll
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 0,
+                y: 100,
+                duration: 1.2,
+                ease: "power4.out"
+            });
+        });
+
+        // Animate service cards
+        gsap.utils.toArray('.service-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%"
+                },
+                opacity: 0,
+                y: 50,
+                rotationX: 10,
+                duration: 0.8,
+                delay: i * 0.05
+            });
+        });
+
+        // Mouse move effect for sections
+        document.querySelectorAll('section').forEach(section => {
+            section.addEventListener('mousemove', (e) => {
+                const rect = section.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                section.style.setProperty('--x', `${x}%`);
+                section.style.setProperty('--y', `${y}%`);
+            });
+        });
+
+        // WhatsApp function
+        function sendWhatsApp() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !phone || !service || !message) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const fullMessage = `*NEW PROJECT INQUIRY - M2N ENGINEERING*
+
+*Name:* ${name}
+*Phone:* ${phone}
+*Service:* ${service}
+*Message:* ${message}
+
+*CRB Class V Registered*
+*TIN: 192-412-951*
+*Kilombero, Morogoro*`;
+
+            window.open(`https://wa.me/255629625288?text=${encodeURIComponent(fullMessage)}`, '_blank');
+        }
+
+        // Simple Three.js background (optional - can be expanded)
+        function initThree() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1000;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                posArray[i] = (Math.random() - 0.5) * 50;
+                posArray[i + 1] = (Math.random() - 0.5) * 50;
+                posArray[i + 2] = (Math.random() - 0.5) * 50;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.05,
+                color: 0x00f0ff,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            camera.position.z = 20;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particlesMesh.rotation.x += 0.0002;
+                particlesMesh.rotation.y += 0.0003;
+                
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize Three.js
+        initThree();
+    </script>
+</body>
+</html>

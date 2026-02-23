@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>M2N ENGINEERING • PREMIUM ELECTRICAL CONTRACTORS TANZANIA</title>
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Clash+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-1: #0f172a;
+            --dark-2: #1e293b;
+            --accent: #00c2ff;
+            --accent-soft: #38bdf8;
+            --gold: #facc15;
+            --white: #ffffff;
+            --text: #cbd5e1;
+            --gradient: linear-gradient(135deg, #00c2ff, #facc15);
+            
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.3);
+            --shadow-md: 0 10px 15px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 25px rgba(0,0,0,0.5);
+            --shadow-xl: 0 30px 40px rgba(0,0,0,0.6);
+            --shadow-accent: 0 0 30px rgba(0, 194, 255, 0.3);
+            --shadow-gold: 0 0 30px rgba(250, 204, 21, 0.3);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
+            --radius-full: 9999px;
+            
+            --header-height: 80px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* =============================================
+            BACKGROUND EFFECTS
+        ============================================= */
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 194, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 194, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+            animation: gridMove 30s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .bg-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: orbFloat 25s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-orb-1 {
+            top: -200px;
+            right: -200px;
+            background: radial-gradient(circle, rgba(0, 194, 255, 0.15) 0%, transparent 70%);
+        }
+
+        .bg-orb-2 {
+            bottom: -200px;
+            left: -200px;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.15) 0%, transparent 70%);
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.2); }
+            66% { transform: translate(-100px, 100px) scale(0.8); }
+        }
+
+        /* =============================================
+            DESKTOP HEADER - HOME, ABOUT, SERVICES, CONTACT
+        ============================================= */
+
+        .desktop-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 194, 255, 0.2);
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Logo Section */
+                /* Logo Section - Sasa Ina Picha */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            width: 190px; /* Badili ukubwa kulingana na logo yako */
+            height: 180px;
+            object-fit: contain; /* Inahakikisha picha inaonekana vizuri */
+            border-radius: var(--radius-md);
+            background: transparent; /* Au uondoe background */
+            /* Au uweke background nyeupe kama logo ina rangi nyeusi */
+            /* background: white; */
+            /* padding: 5px; */
+        }
+
+        .logo-text h1 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--text);
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-image {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .logo-text p {
+                display: none; /* Unaweza kuficha au kuacha */
+            }
+            
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+        }
+
+                /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .desktop-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: var(--radius-full);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .desktop-nav a i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .desktop-nav a:hover::after,
+        .desktop-nav a.active::after {
+            width: 70%;
+        }
+
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--white);
+            background: rgba(0, 194, 255, 0.1);
+        }
+
+        /* Header Contact */
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-badge i {
+            color: var(--gold);
+        }
+
+        .contact-badge:hover {
+            background: var(--accent);
+            color: var(--dark-1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .contact-badge:hover i {
+            color: var(--dark-1);
+        }
+
+        /* =============================================
+            MOBILE SIDEBAR NAVIGATION
+        ============================================= */
+
+        .mobile-menu-btn {
+            display: none;
+            background: var(--gradient);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            color: var(--dark-1);
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-accent);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 2px solid var(--accent);
+            z-index: 2000;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 30px 20px;
+            box-shadow: var(--shadow-xl);
+            overflow-y: auto;
+        }
+
+        .mobile-sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 194, 255, 0.3);
+        }
+
+       /* Sidebar Logo Image */
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-logo-image {
+            width: 190px;
+            height: 190px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            background: transparent; /* Au weka background nyeupe kama inahitajika */
+            /* Kama logo ina rangi nyeusi, weka background nyeupe */
+            /* background: white; */
+            /* padding: 5px; */
+        }
+
+        .sidebar-logo-text h3 {
+            font-size: 1rem;
+            color: var(--white);
+            font-family: 'Clash Display', sans-serif;
+            line-height: 1.2;
+        }
+
+        .sidebar-logo-text p {
+            font-size: 0.65rem;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            .sidebar-logo-image {
+                width: 190px;
+                height: 190px;
+            }
+            
+            .sidebar-logo-text p {
+                display: none; /* Unaweza kuficha au kuacha */
+            }
+        }
+
+        .close-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--accent);
+            color: var(--dark-1);
+            transform: rotate(90deg);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a i {
+            color: var(--gold);
+            width: 24px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(0, 194, 255, 0.1);
+            border-color: var(--accent);
+            color: var(--white);
+            transform: translateX(10px);
+        }
+
+        .sidebar-nav a:hover i {
+            color: var(--accent);
+        }
+
+        .sidebar-badge {
+            background: var(--gradient);
+            color: var(--dark-1);
+            font-size: 0.65rem;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            margin-left: auto;
+            font-weight: 700;
+        }
+
+        .sidebar-contact {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-lg);
+        }
+
+        .sidebar-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-contact-item i {
+            color: var(--gold);
+            width: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* =============================================
+            MAIN CONTENT
+        ============================================= */
+
+        .main-content {
+            margin-top: var(--header-height);
+            padding: 30px;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 80px 60px;
+            margin-bottom: 30px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-2xl);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 194, 255, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            display: inline-block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            background: rgba(0, 194, 255, 0.1);
+            padding: 8px 25px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        /* =============================================
+            HOME SECTION
+        ============================================= */
+
+        #home {
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            margin-bottom: 30px;
+        }
+
+        .hero-badge i {
+            color: var(--gold);
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 700px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid var(--gradient);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .stat-number {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* =============================================
+            SERVICES SECTION - ZOTE 21 ZIKO HAPA
+        ============================================= */
+
+        .services-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 1.1rem;
+            padding: 40px;
+            background: rgba(0, 194, 255, 0.05);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-icon-overlay {
+            position: absolute;
+            bottom: -25px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-1);
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-accent);
+            z-index: 2;
+            border: 3px solid var(--dark-1);
+        }
+
+        .service-content {
+            padding: 35px 25px 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .service-description {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .service-features li {
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features li i {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .service-tag {
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid rgba(0, 194, 255, 0.3);
+            padding: 5px 15px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            color: var(--accent-soft);
+            font-weight: 500;
+        }
+
+        /* =============================================
+            PROJECTS SECTION
+        ============================================= */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 400px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .project-card.featured {
+            grid-column: span 2;
+            height: 500px;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-accent);
+            transform: scale(1.02);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            filter: brightness(0.7);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+            filter: brightness(0.5);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--dark-1) 0%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-category {
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .project-location {
+            color: var(--text);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-location i {
+            color: var(--gold);
+        }
+
+        /* =============================================
+            ABOUT SECTION
+        ============================================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .about-feature:hover {
+            background: rgba(0, 194, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .about-feature i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .about-feature span {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .credentials-card {
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-accent);
+        }
+
+        .credentials-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0.1;
+        }
+
+        .credential-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: var(--radius-md);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .credential-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 194, 255, 0.1);
+        }
+
+        .credential-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .credential-info h4 {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .credential-info p {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* =============================================
+            CONTACT SECTION
+        ============================================= */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .contact-card h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 194, 255, 0.1);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 194, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--gradient);
+            color: var(--dark-1);
+            transform: rotate(360deg);
+        }
+
+        .contact-details h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p,
+        .contact-details a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-details a:hover {
+            color: var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: var(--radius-md);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--shadow-accent);
+            background: rgba(0, 194, 255, 0.05);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            color: var(--text);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            background: var(--dark-1);
+            padding: 0 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus ~ label,
+        .form-group select:focus ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group input:valid ~ label,
+        .form-group select:valid ~ label,
+        .form-group textarea:valid ~ label {
+            top: -10px;
+            left: 15px;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .cert-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-md);
+            margin-top: 30px;
+        }
+
+        .cert-badge i {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .cert-badge span {
+            color: var(--text);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* =============================================
+            BUTTONS
+        ============================================= */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--dark-1);
+            font-weight: 700;
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-accent), var(--shadow-gold);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--dark-1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-wa:hover {
+            background: #20bd5a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* WhatsApp FAB */
+        .wa-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: all 0.4s ease;
+            animation: pulseWA 2s infinite;
+        }
+
+        @keyframes pulseWA {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .wa-fab:hover {
+            transform: scale(1.2) rotate(360deg);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        /* =============================================
+            HIGHLY RESPONSIVE DESIGN
+        ============================================= */
+
+        /* Desktop Large */
+        @media (max-width: 1400px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Desktop Medium */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Tablet Landscape */
+        @media (max-width: 992px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .header-contact {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .header-container {
+                padding: 0 20px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card.featured {
+                grid-column: auto;
+            }
+            
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 50px 30px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tablet Portrait */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .logo-text p {
+                display: none;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            
+            .logo-image {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+            
+            section {
+                padding: 40px 20px;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+            
+            .desktop-header {
+                height: 70px;
+            }
+            
+            .logo-container {
+                gap: 8px;
+            }
+            
+            .mobile-sidebar {
+                width: 280px;
+            }
+            
+            .service-image {
+                height: 180px;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                padding-left: 20px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .contact-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <!-- DESKTOP HEADER -->
+    <header class="desktop-header">
+        <div class="header-container">
+           <!-- Logo Section - Sasa Unaweza Kuweka Picha Yako -->
+        <div class="logo-container">
+            <!-- Badili src na path ya picha yako ya logo -->
+            <img src="image/logo.png" alt="M2N Engineering Logo" class="logo-image">
+            <div class="logo-text">
+                <h1>M2N ENGINEERING</h1>
+                <p>ELECTRICAL CONTRACTORS · TANZANIA</p>
+            </div>
+        </div>
+
+            <!-- Desktop Navigation - HOME, ABOUT, SERVICES, CONTACT -->
+            <nav class="desktop-nav">
+                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="#about"><i class="fas fa-building"></i> About</a>
+                <a href="#services"><i class="fas fa-bolt"></i> Services</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+
+            <!-- Header Contact -->
+            <div class="header-contact">
+                <a href="tel:+255629625288" class="contact-badge">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+255 629 625 288</span>
+                </a>
+                <a href="https://wa.me/255629625288" class="contact-badge">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE SIDEBAR NAVIGATION -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <!-- Sidebar Logo - Sasa Unaweza Kuweka Picha Yako -->
+        <div class="sidebar-logo">
+            <!-- Badili src na path ya picha yako ya logo -->
+            <img src="image/logo.png" alt="M2N Engineering Logo" class="sidebar-logo-image">
+            <div class="sidebar-logo-text">
+                <h3>M2N ENGINEERING</h3>
+                <p>Electrical Contractors</p>
+            </div>
+        </div>
+            <div class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <ul class="sidebar-nav">
+            <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-building"></i> About</a></li>
+            <li><a href="#services"><i class="fas fa-bolt"></i> Services <span class="sidebar-badge">21</span></a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+
+        <div class="sidebar-contact">
+            <a href="tel:+255629625288" class="sidebar-contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+255 629 625 288</span>
+            </a>
+            <a href="https://wa.me/255629625288" class="sidebar-contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <div class="sidebar-contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Kilombero, Morogoro</span>
+            </div>
+            <div class="sidebar-contact-item">
+                <i class="fas fa-certificate"></i>
+                <span>CRB Class V · BRELA</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        
+        <!-- HOME SECTION -->
+        <section id="home">
+            <div class="section-container">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>CRB CLASS V · BRELA INCORPORATED</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Powering <span>Tanzania's Future</span>
+                </h1>
+
+                <p class="hero-description">
+                    M2N Engineering is a premier electrical contracting company based in Kilombero, Morogoro. We deliver world-class electrical solutions across Tanzania with uncompromising quality, safety, and professionalism.
+                </p>
+
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Start Project
+                    </a>
+                    <a href="#services" class="btn btn-outline">
+                        <i class="fas fa-eye"></i>
+                        Explore Services
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">33kV</div>
+                        <div class="stat-label">High Voltage</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">CRB V</div>
+                        <div class="stat-label">Class Five</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">ABOUT US</span>
+                    <h2 class="section-title">Engineering <span>Excellence</span></h2>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>
+                            Founded in 2022, M2N Engineering has rapidly established itself as a premier electrical contractor in Tanzania. Based in Kilombero, Morogoro, we combine local expertise with global standards to deliver exceptional electrical solutions.
+                        </p>
+                        <p>
+                            Our team of certified engineers and technicians brings decades of combined experience across residential, commercial, and industrial projects. We don't just complete projects – we create lasting partnerships built on trust, quality, and innovation.
+                        </p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-certificate"></i>
+                                <span>CRB Class V Registered</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-file-alt"></i>
+                                <span>BRELA Incorporated</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-id-card"></i>
+                                <span>TIN: 192-412-951</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Licensed Until 2027</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="credentials-card">
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-tower-cell"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>High Voltage</h4>
+                                <p>33kV Certified</p>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>Experience</h4>
+                                <p>4+ Years Excellence</p>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>Team</h4>
+                                <p>15+ Professionals</p>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="credential-info">
+                                <h4>Coverage</h4>
+                                <p>Nationwide Tanzania</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION - ZOTE 21 ZIKO HAPA -->
+        <section id="services">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">WHAT WE DO</span>
+                    <h2 class="section-title">Our <span>Services</span></h2>
+                </div>
+
+                <!-- Services Intro -->
+                <div class="services-intro">
+                    <i class="fas fa-bolt" style="color: var(--gold); font-size: 2.5rem; margin-bottom: 20px;"></i>
+                    <p>M2N Engineering provides comprehensive electrical solutions tailored to meet the diverse needs of our clients across Tanzania. From residential wiring to high-voltage industrial installations, our team of certified experts delivers excellence in every project. Each service is backed by our commitment to quality, safety, and customer satisfaction.</p>
+                    <p style="margin-top: 20px; color: var(--accent); font-weight: 600;">We offer 21 specialized electrical services</p>
+                </div>
+
+                <!-- Services Grid - All 21 Services -->
+                <div class="services-grid">
+                    <!-- 1. CCTV Camera Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://cdn.prod.website-files.com/606184adb7296d59f51c3323/6762a52b3d4ec387e9b536b5_security-camera-installation-101-from-system-design-to-deployment.webp" alt="CCTV Installation">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>CCTV Camera Installation</h3>
+                            <p class="service-description">Advanced surveillance systems with HD cameras, night vision, and remote monitoring for complete security of your property.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> HD & 4K Cameras</li>
+                                <li><i class="fas fa-check"></i> Night Vision & Motion Detection</li>
+                                <li><i class="fas fa-check"></i> Remote Viewing via App</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">HD Quality</span>
+                                <span class="service-tag">Remote Access</span>
+                                <span class="service-tag">24/7 Recording</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Electric Fence Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://keensight.co.ke/categories/Electric-Fences-Razor.jpg" alt="Electric Fence">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Electric Fence Installation</h3>
+                            <p class="service-description">High-security perimeter protection systems that provide reliable deterrent against intruders with real-time alert capabilities.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> High Voltage Deterrent</li>
+                                <li><i class="fas fa-check"></i> Alarm Integration</li>
+                                <li><i class="fas fa-check"></i> Tamper-Proof Design</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Perimeter Security</span>
+                                <span class="service-tag">Alarm System</span>
+                                <span class="service-tag">Energizer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Gate Motor Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.elettronew.com/blog/wp-content/uploads/2024/10/automatizzare-un-cancello.png" alt="Gate Motor">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-car"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Gate Motor Installation</h3>
+                            <p class="service-description">Automatic gate systems for residential and commercial properties offering convenience, security, and enhanced property value.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Remote Control Operation</li>
+                                <li><i class="fas fa-check"></i> Safety Sensors</li>
+                                <li><i class="fas fa-check"></i> Backup Battery Option</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Automatic</span>
+                                <span class="service-tag">Remote</span>
+                                <span class="service-tag">Safety</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Troubleshooting -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.bestbrooklynelectrician.com/wp-content/uploads/2020/11/Electrical-troubleshooting.png" alt="Troubleshooting">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Troubleshooting</h3>
+                            <p class="service-description">Expert diagnostic services to quickly identify and resolve electrical faults, minimizing downtime and preventing future issues.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Advanced Diagnostics</li>
+                                <li><i class="fas fa-check"></i> Fault Finding</li>
+                                <li><i class="fas fa-check"></i> Quick Resolution</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Diagnostics</span>
+                                <span class="service-tag">Repairs</span>
+                                <span class="service-tag">Emergency</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Electrical Maintenance -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://parkinelectric.com/wp-content/uploads/2025/10/oct-blog-img-2.png" alt="Maintenance">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Electrical Maintenance</h3>
+                            <p class="service-description">Comprehensive preventive and corrective maintenance programs to keep your electrical systems running efficiently and safely.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Preventive Maintenance</li>
+                                <li><i class="fas fa-check"></i> Corrective Repairs</li>
+                                <li><i class="fas fa-check"></i> System Optimization</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Preventive</span>
+                                <span class="service-tag">Corrective</span>
+                                <span class="service-tag">Inspection</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Water Pump Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://sunnybliss.com/wp-content/uploads/2024/11/Installation-And-Repairing-of-Water-Pumps-12-nov-2024.png" alt="Water Pump">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-water"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Water Pump Installation</h3>
+                            <p class="service-description">Professional installation and servicing of water pumping systems for domestic, agricultural, and industrial applications.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Submersible Pumps</li>
+                                <li><i class="fas fa-check"></i> Surface Pumps</li>
+                                <li><i class="fas fa-check"></i> Pressure Systems</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Submersible</span>
+                                <span class="service-tag">Surface</span>
+                                <span class="service-tag">Industrial</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Residential Wiring -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.ultratechcement.com/content/ultratechcement/in/en/home/for-homebuilders/home-building-explained-single/descriptive-articles/house-electrical-wiring-types/_jcr_content/root/container/container_2072089177/teaser_copy_copy_cop_2001299576.coreimg.jpeg/1741677677264/conduit-wiring.jpeg" alt="Residential Wiring">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-home"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Residential Wiring</h3>
+                            <p class="service-description">Complete electrical wiring solutions for homes and apartments, ensuring safety, compliance, and modern functionality.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> New Construction</li>
+                                <li><i class="fas fa-check"></i> Rewiring & Upgrades</li>
+                                <li><i class="fas fa-check"></i> Safety Compliance</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">New Build</span>
+                                <span class="service-tag">Rewiring</span>
+                                <span class="service-tag">Safety</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Industrial Wiring -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.tridenttechlabs.com/uae/blogs/wp-content/uploads/2025/07/Industrial-Electrical-Network-Engineering-Design-1024x683.jpg" alt="Industrial Wiring">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Industrial Wiring</h3>
+                            <p class="service-description">Complex industrial electrical systems including control panels, motor control centers, and factory installations.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> 3-Phase Systems</li>
+                                <li><i class="fas fa-check"></i> Control Panels</li>
+                                <li><i class="fas fa-check"></i> Machinery Wiring</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">3-Phase</span>
+                                <span class="service-tag">Control Panels</span>
+                                <span class="service-tag">Automation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Architecture -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.kogakuin.ac.jp/english/faculty/rtfiq300000007j7-img/2.jpg" alt="Architecture">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-draw-polygon"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Architecture</h3>
+                            <p class="service-description">Professional architectural design services with integrated electrical planning for optimal functionality and aesthetics.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Building Design</li>
+                                <li><i class="fas fa-check"></i> Electrical Planning</li>
+                                <li><i class="fas fa-check"></i> Consultation</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Design</span>
+                                <span class="service-tag">Planning</span>
+                                <span class="service-tag">Consulting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. HT & LT Pole Construction -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://shelectromech.com/images/a10.jpg" alt="HT/LT Poles">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-tower-cell"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>HT & LT Pole Construction</h3>
+                            <p class="service-description">Construction of High Tension and Low Tension power distribution poles for utility companies and private developments.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> 33kV HT Poles</li>
+                                <li><i class="fas fa-check"></i> Distribution Poles</li>
+                                <li><i class="fas fa-check"></i> Concrete & Steel</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">33kV</span>
+                                <span class="service-tag">Distribution</span>
+                                <span class="service-tag">Utility</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. Transformer Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.weishoelec.com/zb_users/upload/2025/07/202507021751447281115257.jpeg" alt="Transformer">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-charging-station"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Transformer Installation</h3>
+                            <p class="service-description">Expert installation, testing, and commissioning of power transformers for distribution substations and industrial facilities.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Distribution Transformers</li>
+                                <li><i class="fas fa-check"></i> Power Transformers</li>
+                                <li><i class="fas fa-check"></i> Testing & Commissioning</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Distribution</span>
+                                <span class="service-tag">Power</span>
+                                <span class="service-tag">Substation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. Motor Rewinding -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://dandmelectrical.com.au/wp-content/uploads/2022/01/motor-rewinding-4879.jpg" alt="Motor Rewinding">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-redo-alt"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Motor Rewinding</h3>
+                            <p class="service-description">Professional rewinding and refurbishment of electric motors to restore performance and extend service life.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> AC/DC Motors</li>
+                                <li><i class="fas fa-check"></i> Industrial Motors</li>
+                                <li><i class="fas fa-check"></i> Pump Motors</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">AC/DC</span>
+                                <span class="service-tag">Repair</span>
+                                <span class="service-tag">Refurbishment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 13. Wholesale Electrical Products -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://ampsqr.com/assets/uploads/carousel/banner-1.png" alt="Wholesale">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-store"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Wholesale Electrical Products</h3>
+                            <p class="service-description">Supply of quality electrical materials, cables, switchgear, and components at competitive wholesale prices.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Cables & Wires</li>
+                                <li><i class="fas fa-check"></i> Switchgear</li>
+                                <li><i class="fas fa-check"></i> Lighting Products</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Materials</span>
+                                <span class="service-tag">Equipment</span>
+                                <span class="service-tag">Wholesale</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 14. Electrical Contractor -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://braseelectrical.com/wp-content/uploads/2023/09/electrician-with-electric-cable-2022-12-16-11-44-12-utc-copy.jpg" alt="Contractor">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Electrical Contractor</h3>
+                            <p class="service-description">Full-service electrical contracting for commercial, industrial, and infrastructure projects of any scale.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Project Management</li>
+                                <li><i class="fas fa-check"></i> Installation Services</li>
+                                <li><i class="fas fa-check"></i> Maintenance Contracts</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">CRB V</span>
+                                <span class="service-tag">Licensed</span>
+                                <span class="service-tag">Insured</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 15. Plumbing Works -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.geoken.co.ke/images/services/plumbing-works.jpg" alt="Plumbing">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Plumbing Works</h3>
+                            <p class="service-description">Professional plumbing installation and maintenance services for residential and commercial buildings.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Water Supply</li>
+                                <li><i class="fas fa-check"></i> Drainage Systems</li>
+                                <li><i class="fas fa-check"></i> Sanitary Ware</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Water</span>
+                                <span class="service-tag">Drainage</span>
+                                <span class="service-tag">Installation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 16. Cable Termination -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://lirp.cdn-website.com/9add30a7/dms3rep/multi/opt/network-684009_1920-640w.jpg" alt="Cable Termination">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-cable-car"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Cable Termination</h3>
+                            <p class="service-description">Professional cable termination and testing for low, medium, and high voltage electrical systems.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> LV Cable Termination</li>
+                                <li><i class="fas fa-check"></i> MV/HV Terminations</li>
+                                <li><i class="fas fa-check"></i> Testing & Certification</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">LV/MV/HV</span>
+                                <span class="service-tag">Testing</span>
+                                <span class="service-tag">Certification</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 17. Oil Station Pump Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://i.ytimg.com/vi/qofkjUONTJc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLConqI_9vhMh2l4Zg3w7hXQ7CxynA" alt="Oil Station">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-gas-pump"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Oil Station Pump Installation</h3>
+                            <p class="service-description">Specialized installation of fuel dispensing systems and pumps for petrol stations and fuel depots.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Fuel Dispensers</li>
+                                <li><i class="fas fa-check"></i> Submersible Pumps</li>
+                                <li><i class="fas fa-check"></i> Control Systems</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Fuel Pumps</span>
+                                <span class="service-tag">Dispensers</span>
+                                <span class="service-tag">Petrol Stations</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 18. Solar Power Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlL36ZMlrdLLS0irq-ocB2yluPGU2dFX0F2w&s" alt="Solar Power">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Solar Power Installation</h3>
+                            <p class="service-description">Complete solar energy solutions including panels, inverters, batteries, and system design for homes and businesses.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Grid-Tie Systems</li>
+                                <li><i class="fas fa-check"></i> Off-Grid Solutions</li>
+                                <li><i class="fas fa-check"></i> Battery Backup</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Grid-tie</span>
+                                <span class="service-tag">Off-grid</span>
+                                <span class="service-tag">Hybrid</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 19. Backup System Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://gadgetronix.net/wp-content/uploads/2023/03/Power-Backup-Systems.jpg" alt="Backup Systems">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Backup System Installation</h3>
+                            <p class="service-description">Uninterruptible power solutions including UPS, generators, and inverter backup systems for critical applications.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Generator Installation</li>
+                                <li><i class="fas fa-check"></i> UPS Systems</li>
+                                <li><i class="fas fa-check"></i> Inverter Backup</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Generators</span>
+                                <span class="service-tag">UPS</span>
+                                <span class="service-tag">Inverters</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 20. Street Lighting Installation -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://www.smart-solar-lights.com/Content/upload/2018206102/201806042038543310497.png" alt="Street Lighting">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-street-view"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Street Lighting Installation</h3>
+                            <p class="service-description">LED and solar street lighting solutions for public roads, parking lots, and commercial areas.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> LED Street Lights</li>
+                                <li><i class="fas fa-check"></i> Solar Lighting</li>
+                                <li><i class="fas fa-check"></i> Decorative Lighting</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">LED</span>
+                                <span class="service-tag">Solar</span>
+                                <span class="service-tag">Public Lighting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 21. Civil Construction -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://media.istockphoto.com/id/838476004/photo/silhouette-of-engineer-and-construction-team-working-safely-work-load-concrete-on-scaffolding.jpg?s=612x612&w=0&k=20&c=jpBmpgsT6PTXZYAIk4aHjNQt7LHkiRe_gq1Il9az9o4=" alt="Civil Construction">
+                            <div class="service-icon-overlay">
+                                <i class="fas fa-building"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Civil Construction</h3>
+                            <p class="service-description">Civil works related to electrical infrastructure including foundations, trenches, and structural support.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Foundation Works</li>
+                                <li><i class="fas fa-check"></i> Trenching</li>
+                                <li><i class="fas fa-check"></i> Concrete Structures</li>
+                            </ul>
+                            <div class="service-tags">
+                                <span class="service-tag">Foundations</span>
+                                <span class="service-tag">Trenching</span>
+                                <span class="service-tag">Structures</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">PORTFOLIO</span>
+                    <h2 class="section-title">Featured <span>Projects</span></h2>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card featured">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=85" alt="33kV Substation" class="project-image">
+                        <div class="project-overlay">
+                            <span class="project-category">High Voltage</span>
+                            <h3 class="project-title">33kV Substation & Recloser</h3>
+                            <p class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Kilombero, Morogoro
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://www.gridshop.hu/_upload/images/catalog/1300106536/400x300/1300106536_01.jpg" alt="Transformer" class="project-image">
+                        <div class="project-overlay">
+                            <span class="project-category">Power Distribution</span>
+                            <h3 class="project-title">Transformer Commissioning</h3>
+                            <p class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ifakara, Morogoro
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://media.istockphoto.com/id/173006696/photo/power-line-construction.jpg?s=612x612&w=0&k=20&c=O8g9Aehd-TcOqXZlAEEbQblvcVvhHTdvrD7prxmrK5A=" alt="Power Lines" class="project-image">
+                        <div class="project-overlay">
+                            <span class="project-category">Line Construction</span>
+                            <h3 class="project-title">MV Distribution Line</h3>
+                            <p class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Morogoro Region
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">GET IN TOUCH</span>
+                    <h2 class="section-title">Contact <span>Us</span></h2>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Location</h4>
+                                <p>Mkamba Street, Kidatu Ward, Kilombero, Morogoro, Tanzania</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Phone / WhatsApp</h4>
+                                <a href="tel:+255629625288">+255 629 625 288</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <a href="mailto:info@m2nengineering.co.tz">info@m2nengineering.co.tz</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Working Hours</h4>
+                                <p>Mon-Fri: 8:00 - 17:00 | Sat: 8:00 - 13:00</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>CRB Class V · BRELA #192412951 · TIN: 192-412-951</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Send Inquiry</h3>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" required>
+                                <label>Full Name *</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="tel" id="phone" required>
+                                <label>Phone / WhatsApp *</label>
+                            </div>
+
+                            <div class="form-group">
+                                <select id="service" required>
+                                    <option value="" disabled selected></option>
+                                    <option>CCTV Camera Installation</option>
+                                    <option>Electric Fence Installation</option>
+                                    <option>Gate Motor Installation</option>
+                                    <option>Troubleshooting</option>
+                                    <option>Electrical Maintenance</option>
+                                    <option>Water Pump Installation</option>
+                                    <option>Residential Wiring</option>
+                                    <option>Industrial Wiring</option>
+                                    <option>Architecture</option>
+                                    <option>HT/LT Pole Construction</option>
+                                    <option>Transformer Installation</option>
+                                    <option>Motor Rewinding</option>
+                                    <option>Wholesale Electrical Products</option>
+                                    <option>Electrical Contractor</option>
+                                    <option>Plumbing Works</option>
+                                    <option>Cable Termination</option>
+                                    <option>Oil Station Pump Installation</option>
+                                    <option>Solar Power Installation</option>
+                                    <option>Backup System Installation</option>
+                                    <option>Street Lighting Installation</option>
+                                    <option>Civil Construction</option>
+                                </select>
+                                <label>Service Required *</label>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea id="message" required></textarea>
+                                <label>Project Details *</label>
+                            </div>
+
+                            <button type="button" class="btn btn-wa" onclick="sendWhatsApp()">
+                                <i class="fab fa-whatsapp"></i>
+                                Send via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/255629625288" class="wa-fab" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Sidebar Functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+
+        function openSidebar() {
+            mobileSidebar.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebarFunc() {
+            mobileSidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        overlay.addEventListener('click', closeSidebarFunc);
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    closeSidebarFunc();
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.desktop-nav a, .sidebar-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mouse move effect for sections
+        document.querySelectorAll('section').forEach(section => {
+            section.addEventListener('mousemove', (e) => {
+                const rect = section.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                section.style.setProperty('--x', `${x}%`);
+                section.style.setProperty('--y', `${y}%`);
+            });
+        });
+
+        // WhatsApp function
+        function sendWhatsApp() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !phone || !service || !message) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const fullMessage = `*NEW PROJECT INQUIRY - M2N ENGINEERING*
+
+*Name:* ${name}
+*Phone:* ${phone}
+*Service:* ${service}
+*Message:* ${message}
+
+*CRB Class V Registered*
+*TIN: 192-412-951*
+*Kilombero, Morogoro*`;
+
+            window.open(`https://wa.me/255629625288?text=${encodeURIComponent(fullMessage)}`, '_blank');
+        }
+
+        // GSAP Animations (optional)
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.utils.toArray('.service-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    delay: i * 0.05
+                });
+            });
+        }
+    </script>
+</body>
+</html>
