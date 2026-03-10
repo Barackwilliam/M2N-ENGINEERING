@@ -15,10 +15,8 @@ except ImportError:
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-m2n-engineering-change-this-in-production-2025')
 
 DEBUG = False
-ALLOWED_HOSTS = 'www.m2nengineeringcoltd.com, m2nengineeringcoltd.com, localhost, 127.0.0.1'
-
-CSRF_TRUSTED_ORIGINS = 'https://www.m2nengineeringcoltd.com, https://m2nengineeringcoltd.com'
-
+ALLOWED_HOSTS = ["www.m2nengineeringcoltd.com","m2nengineeringcoltd.com","localhost","127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://www.m2nengineeringcoltd.com","https://m2nengineeringcoltd.com"]
 # ============================================================
 # JAZZMIN
 # ============================================================
