@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-m2n-engineering-chang
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1','https://www.m2nengineeringcoltd.com').split(',')
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
