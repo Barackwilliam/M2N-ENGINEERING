@@ -14,7 +14,7 @@ except ImportError:
 # ============================================================
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-m2n-engineering-change-this-in-production-2025')
 
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS','https://www.m2nengineeringcoltd.com').split(',')
 
