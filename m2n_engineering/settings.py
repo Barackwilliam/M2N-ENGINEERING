@@ -137,6 +137,15 @@ INSTALLED_APPS = [
     'website',
 ]
 
+
+
+
+# If using uploader:
+CKEDITOR_UPLOAD_PATH = 'uploads/' 
+JAMIITEK_API_KEY = "vBVSyGW21D6KsLd7aP7Q-6XDkyRC_jMrE3-0GmrnEMzLA13Jcq4CcKoE7eClzq_p"
+JAMIITEK_API_URL = "https://jamiitek.com/api/site-status/"
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -146,6 +155,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'jamiitek_middleware.JamiiTekStatusMiddleware',  # This one here
+
 ]
 
 ROOT_URLCONF = 'm2n_engineering.urls'
