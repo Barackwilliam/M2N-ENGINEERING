@@ -44,22 +44,21 @@
         }
 
         :root {
-            /* ---- LIGHT THEME COLORS ---- */
-            --dark-1: #ffffff;
-            --dark-2: #f1f5f9;
-            --accent: #0077cc;
-            --accent-soft: #0ea5e9;
-            --gold: #d97706;
-            --white: #1e293b;        /* used for text now */
-            --text: #475569;
-            --gradient: linear-gradient(135deg, #0077cc, #d97706);
+            --dark-1: #0f172a;
+            --dark-2: #1e293b;
+            --accent: #00c2ff;
+            --accent-soft: #38bdf8;
+            --gold: #facc15;
+            --white: #ffffff;
+            --text: #cbd5e1;
+            --gradient: linear-gradient(135deg, #00c2ff, #facc15);
 
-            --shadow-sm: 0 4px 6px rgba(0,0,0,0.08);
-            --shadow-md: 0 10px 15px rgba(0,0,0,0.10);
-            --shadow-lg: 0 20px 25px rgba(0,0,0,0.12);
-            --shadow-xl: 0 30px 40px rgba(0,0,0,0.14);
-            --shadow-accent: 0 0 30px rgba(0, 119, 204, 0.2);
-            --shadow-gold: 0 0 30px rgba(217, 119, 6, 0.2);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.3);
+            --shadow-md: 0 10px 15px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 25px rgba(0,0,0,0.5);
+            --shadow-xl: 0 30px 40px rgba(0,0,0,0.6);
+            --shadow-accent: 0 0 30px rgba(0, 194, 255, 0.3);
+            --shadow-gold: 0 0 30px rgba(250, 204, 21, 0.3);
 
             --radius-sm: 8px;
             --radius-md: 12px;
@@ -69,18 +68,11 @@
             --radius-full: 9999px;
 
             --header-height: 80px;
-
-            /* New light-theme surface colors */
-            --surface-1: #ffffff;
-            --surface-2: #f8fafc;
-            --surface-3: #f1f5f9;
-            --border: rgba(0, 119, 204, 0.15);
-            --border-strong: rgba(0, 119, 204, 0.35);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #eef2f7;
+            background: linear-gradient(135deg, #0f172a, #020617);
             color: var(--white);
             overflow-x: hidden;
             min-height: 100vh;
@@ -97,8 +89,8 @@
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(0, 119, 204, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 119, 204, 0.04) 1px, transparent 1px);
+                linear-gradient(rgba(0, 194, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 194, 255, 0.03) 1px, transparent 1px);
             background-size: 60px 60px;
             pointer-events: none;
             z-index: -1;
@@ -124,13 +116,13 @@
         .bg-orb-1 {
             top: -200px;
             right: -200px;
-            background: radial-gradient(circle, rgba(0, 119, 204, 0.10) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 194, 255, 0.15) 0%, transparent 70%);
         }
 
         .bg-orb-2 {
             bottom: -200px;
             left: -200px;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.10) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.15) 0%, transparent 70%);
         }
 
         @keyframes orbFloat {
@@ -148,15 +140,14 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-strong);
+            border-bottom: 1px solid rgba(0, 194, 255, 0.2);
             z-index: 1000;
             height: var(--header-height);
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 12px rgba(0, 119, 204, 0.08);
         }
 
         .header-container {
@@ -244,8 +235,8 @@
 
         .desktop-nav a:hover,
         .desktop-nav a.active {
-            color: var(--accent);
-            background: rgba(0, 119, 204, 0.07);
+            color: var(--white);
+            background: rgba(0, 194, 255, 0.1);
         }
 
         .header-contact {
@@ -258,11 +249,11 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 119, 204, 0.08);
+            background: rgba(0, 194, 255, 0.1);
             border: 1px solid var(--accent);
             padding: 8px 16px;
             border-radius: var(--radius-full);
-            color: var(--accent);
+            color: var(--white);
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.3s ease;
@@ -272,12 +263,12 @@
 
         .contact-badge:hover {
             background: var(--accent);
-            color: #ffffff;
+            color: var(--dark-1);
             transform: translateY(-2px);
             box-shadow: var(--shadow-accent);
         }
 
-        .contact-badge:hover i { color: #ffffff; }
+        .contact-badge:hover i { color: var(--dark-1); }
 
         /* =============================================
             MOBILE SIDEBAR NAVIGATION
@@ -290,7 +281,7 @@
             width: 50px;
             height: 50px;
             border-radius: var(--radius-md);
-            color: #ffffff;
+            color: var(--dark-1);
             font-size: 1.5rem;
             cursor: pointer;
             box-shadow: var(--shadow-accent);
@@ -304,7 +295,7 @@
             left: -320px;
             width: 300px;
             height: 100vh;
-            background: rgba(255, 255, 255, 0.99);
+            background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-right: 2px solid var(--accent);
@@ -323,7 +314,7 @@
             justify-content: space-between;
             margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-strong);
+            border-bottom: 1px solid rgba(0, 194, 255, 0.3);
         }
 
         .sidebar-logo {
@@ -357,7 +348,7 @@
         .close-btn {
             width: 40px;
             height: 40px;
-            background: rgba(0, 119, 204, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--accent);
             border-radius: var(--radius-full);
             display: flex;
@@ -370,7 +361,7 @@
 
         .close-btn:hover {
             background: var(--accent);
-            color: #ffffff;
+            color: var(--dark-1);
             transform: rotate(90deg);
         }
 
@@ -394,9 +385,9 @@
 
         .sidebar-nav a:hover,
         .sidebar-nav a.active {
-            background: rgba(0, 119, 204, 0.07);
+            background: rgba(0, 194, 255, 0.1);
             border-color: var(--accent);
-            color: var(--accent);
+            color: var(--white);
             transform: translateX(10px);
         }
 
@@ -404,7 +395,7 @@
 
         .sidebar-badge {
             background: var(--gradient);
-            color: #ffffff;
+            color: var(--dark-1);
             font-size: 0.65rem;
             padding: 3px 10px;
             border-radius: var(--radius-full);
@@ -415,8 +406,8 @@
         .sidebar-contact {
             margin-top: 30px;
             padding: 20px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-lg);
         }
 
@@ -428,17 +419,18 @@
             text-decoration: none;
             font-size: 0.9rem;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.07);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .sidebar-contact-item:last-child { border-bottom: none; }
         .sidebar-contact-item i { color: var(--gold); width: 20px; }
 
+        /* Social links in sidebar */
         .sidebar-social {
             margin-top: 20px;
             padding: 15px 20px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
+            background: rgba(0, 194, 255, 0.03);
+            border: 1px solid rgba(0, 194, 255, 0.15);
             border-radius: var(--radius-lg);
         }
 
@@ -460,8 +452,8 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: rgba(0, 119, 204, 0.08);
-            border: 1px solid var(--border-strong);
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid rgba(0, 194, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -473,7 +465,7 @@
 
         .sidebar-social-link:hover {
             background: var(--gradient);
-            color: #ffffff;
+            color: var(--dark-1);
             transform: scale(1.15);
             border-color: transparent;
         }
@@ -484,7 +476,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1999;
             opacity: 0;
             visibility: hidden;
@@ -503,83 +495,31 @@
             min-height: calc(100vh - var(--header-height));
         }
 
-        /* Social section inside contact — light warm tint */
-        .social-section {
-            margin-top: 40px;
-            padding: 40px;
-            background: linear-gradient(135deg, #f0f7ff 0%, #fefce8 100%);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            text-align: center;
-        }
-
         section {
             min-height: 100vh;
             padding: 80px 60px;
             margin-bottom: 30px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-2xl);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-xl);
         }
 
         section::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 119, 204, 0.06) 0%, transparent 50%);
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 194, 255, 0.1) 0%, transparent 50%);
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
-            border-radius: inherit;
         }
 
         section:hover::before { opacity: 1; }
-
-        /* ── HERO: clean white with very subtle blue wash ── */
-        #home {
-            background: linear-gradient(145deg, #ffffff 60%, #e8f4ff 100%);
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 24px rgba(0, 119, 204, 0.06);
-        }
-
-        /* ── ABOUT: pure white ── */
-        #about {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-        }
-
-        /* ── SERVICES: very light cool gray ── */
-        #services {
-            background: linear-gradient(160deg, #f1f5f9 0%, #e8f0fb 100%);
-            border: 1px solid rgba(0, 119, 204, 0.12);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-        }
-
-        /* ── PROJECTS: rich dark navy — dramatic contrast ── */
-        #projects {
-            background: linear-gradient(145deg, #0f172a 0%, #1a2744 100%);
-            border: 1px solid rgba(0, 194, 255, 0.2);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        /* projects section text overrides */
-        #projects .section-subtitle {
-            color: #38bdf8;
-            background: rgba(56, 189, 248, 0.1);
-            border-color: #38bdf8;
-        }
-
-        #projects .section-title {
-            color: #ffffff;
-        }
-
-        /* ── CONTACT: pure white ── */
-        #contact {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-        }
 
         .section-container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
 
@@ -592,7 +532,7 @@
             letter-spacing: 4px;
             color: var(--accent);
             margin-bottom: 15px;
-            background: rgba(0, 119, 204, 0.08);
+            background: rgba(0, 194, 255, 0.1);
             padding: 8px 25px;
             border-radius: var(--radius-full);
             border: 1px solid var(--accent);
@@ -602,7 +542,7 @@
             font-family: 'Clash Display', sans-serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            color: #1e293b;
+            color: var(--white);
         }
 
         .section-title span {
@@ -624,12 +564,11 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: rgba(0, 119, 204, 0.08);
+            background: rgba(0, 194, 255, 0.1);
             border: 1px solid var(--accent);
             padding: 12px 24px;
             border-radius: var(--radius-full);
             margin-bottom: 30px;
-            color: var(--accent);
         }
 
         .hero-badge i { color: var(--gold); animation: spin 4s linear infinite; }
@@ -645,7 +584,6 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 30px;
-            color: #1e293b;
         }
 
         .hero-title span {
@@ -674,13 +612,12 @@
         }
 
         .stat-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-lg);
             padding: 30px;
             text-align: center;
             transition: all 0.4s ease;
-            box-shadow: 0 2px 12px rgba(0, 119, 204, 0.07);
         }
 
         .stat-card:hover {
@@ -713,10 +650,9 @@
             line-height: 1.9;
             font-size: 1.1rem;
             padding: 40px;
-            background: #ffffff;
+            background: rgba(0, 194, 255, 0.05);
             border-radius: var(--radius-xl);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 194, 255, 0.2);
         }
 
         .services-grid {
@@ -726,13 +662,12 @@
         }
 
         .service-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-lg);
             overflow: hidden;
             transition: all 0.4s ease;
             position: relative;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .service-card::before {
@@ -745,7 +680,7 @@
             z-index: 0;
         }
 
-        .service-card:hover::before { opacity: 0.05; }
+        .service-card:hover::before { opacity: 0.1; }
 
         .service-card:hover {
             transform: translateY(-10px) scale(1.02);
@@ -775,11 +710,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
+            color: var(--dark-1);
             font-size: 1.5rem;
             box-shadow: var(--shadow-accent);
             z-index: 2;
-            border: 3px solid #ffffff;
+            border: 3px solid var(--dark-1);
         }
 
         .service-content { padding: 35px 25px 25px; position: relative; z-index: 1; }
@@ -787,7 +722,7 @@
         .service-content h3 {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--white);
             margin-bottom: 15px;
             font-family: 'Clash Display', sans-serif;
         }
@@ -810,12 +745,12 @@
         .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
         .service-tag {
-            background: rgba(0, 119, 204, 0.08);
-            border: 1px solid var(--border-strong);
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid rgba(0, 194, 255, 0.3);
             padding: 5px 15px;
             border-radius: var(--radius-full);
             font-size: 0.75rem;
-            color: var(--accent);
+            color: var(--accent-soft);
             font-weight: 500;
         }
 
@@ -835,9 +770,8 @@
             overflow: hidden;
             height: 400px;
             cursor: pointer;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             transition: all 0.5s ease;
-            box-shadow: var(--shadow-sm);
         }
 
         .project-card.featured {
@@ -856,18 +790,18 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
-            filter: brightness(0.85);
+            filter: brightness(0.7);
         }
 
         .project-card:hover .project-image {
             transform: scale(1.1);
-            filter: brightness(0.6);
+            filter: brightness(0.5);
         }
 
         .project-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, transparent 100%);
+            background: linear-gradient(to top, var(--dark-1) 0%, transparent 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -879,11 +813,11 @@
 
         .project-card:hover .project-overlay { opacity: 1; transform: translateY(0); }
 
-        .project-category { color: #7dd3fc; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        .project-category { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
 
-        .project-title { font-family: 'Clash Display', sans-serif; font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+        .project-title { font-family: 'Clash Display', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
 
-        .project-location { color: #cbd5e1; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .project-location { color: var(--text); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
 
         .project-location i { color: var(--gold); }
 
@@ -907,24 +841,24 @@
             align-items: center;
             gap: 15px;
             padding: 15px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
+            background: rgba(0, 194, 255, 0.05);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-md);
             transition: all 0.3s ease;
         }
 
         .about-feature:hover {
-            background: rgba(0, 119, 204, 0.07);
+            background: rgba(0, 194, 255, 0.1);
             border-color: var(--accent);
             transform: translateX(10px);
         }
 
         .about-feature i { color: var(--gold); font-size: 1.2rem; }
 
-        .about-feature span { color: #1e293b; font-weight: 500; }
+        .about-feature span { color: var(--white); font-weight: 500; }
 
         .credentials-card {
-            background: rgba(0, 119, 204, 0.04);
+            background: rgba(0, 194, 255, 0.05);
             border: 1px solid var(--accent);
             border-radius: var(--radius-lg);
             padding: 40px;
@@ -938,7 +872,7 @@
             position: absolute;
             inset: 0;
             background: var(--gradient);
-            opacity: 0.04;
+            opacity: 0.1;
         }
 
         .credential-item {
@@ -947,21 +881,19 @@
             gap: 15px;
             margin-bottom: 25px;
             padding: 15px;
-            background: var(--surface-1);
+            background: rgba(15, 23, 42, 0.8);
             border-radius: var(--radius-md);
             position: relative;
             z-index: 1;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
         }
 
-        .credential-item:hover { transform: translateX(10px); background: rgba(0, 119, 204, 0.06); }
+        .credential-item:hover { transform: translateX(10px); background: rgba(0, 194, 255, 0.1); }
 
         .credential-icon {
             width: 50px;
             height: 50px;
-            background: rgba(0, 119, 204, 0.08);
+            background: rgba(0, 194, 255, 0.1);
             border: 1px solid var(--accent);
             border-radius: var(--radius-sm);
             display: flex;
@@ -973,7 +905,7 @@
 
         .credential-info h4 { color: var(--accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
 
-        .credential-info p { color: #1e293b; font-weight: 600; font-size: 1rem; }
+        .credential-info p { color: var(--white); font-weight: 600; font-size: 1rem; }
 
         /* =============================================
             CONTACT SECTION
@@ -982,12 +914,12 @@
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
 
         .contact-card {
-            background: var(--surface-1);
-            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-lg);
             padding: 40px;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(5px);
         }
 
         .contact-card:hover { border-color: var(--accent); box-shadow: var(--shadow-accent); }
@@ -1008,19 +940,19 @@
             gap: 20px;
             margin-bottom: 25px;
             padding: 20px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 194, 255, 0.1);
             border-radius: var(--radius-md);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .contact-item:hover { background: rgba(0, 119, 204, 0.06); border-color: var(--accent); transform: translateX(10px); }
+        .contact-item:hover { background: rgba(0, 194, 255, 0.1); border-color: var(--accent); transform: translateX(10px); }
 
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: rgba(0, 119, 204, 0.08);
+            background: rgba(0, 194, 255, 0.1);
             border: 1px solid var(--accent);
             border-radius: var(--radius-sm);
             display: flex;
@@ -1032,12 +964,12 @@
             flex-shrink: 0;
         }
 
-        .contact-item:hover .contact-icon { background: var(--gradient); color: #ffffff; transform: rotate(360deg); }
+        .contact-item:hover .contact-icon { background: var(--gradient); color: var(--dark-1); transform: rotate(360deg); }
 
         .contact-details h4 { color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
 
         .contact-details p,
-        .contact-details a { color: #1e293b; text-decoration: none; font-size: 1rem; font-weight: 500; }
+        .contact-details a { color: var(--white); text-decoration: none; font-size: 1rem; font-weight: 500; }
 
         .contact-details a:hover { color: var(--gold); }
 
@@ -1048,10 +980,10 @@
         .form-group textarea {
             width: 100%;
             padding: 15px 20px;
-            background: var(--surface-2);
-            border: 1px solid var(--border-strong);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 194, 255, 0.2);
             border-radius: var(--radius-md);
-            color: #1e293b;
+            color: var(--white);
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             transition: all 0.3s ease;
@@ -1065,7 +997,7 @@
             outline: none;
             border-color: var(--accent);
             box-shadow: var(--shadow-accent);
-            background: rgba(0, 119, 204, 0.04);
+            background: rgba(0, 194, 255, 0.05);
         }
 
         .form-group label {
@@ -1075,7 +1007,7 @@
             color: var(--text);
             pointer-events: none;
             transition: all 0.3s ease;
-            background: var(--surface-2);
+            background: var(--dark-1);
             padding: 0 8px;
             font-size: 0.95rem;
         }
@@ -1090,7 +1022,6 @@
             left: 15px;
             font-size: 0.8rem;
             color: var(--accent);
-            background: var(--surface-1);
         }
 
         .cert-badge {
@@ -1098,7 +1029,7 @@
             align-items: center;
             gap: 12px;
             padding: 20px;
-            background: rgba(0, 119, 204, 0.05);
+            background: rgba(0, 194, 255, 0.05);
             border: 1px solid var(--accent);
             border-radius: var(--radius-md);
             margin-top: 30px;
@@ -1109,10 +1040,17 @@
         .cert-badge span { color: var(--text); font-size: 0.85rem; line-height: 1.6; }
 
         /* =============================================
-            SOCIAL MEDIA SECTION
+            SOCIAL MEDIA SECTION (Footer area inside Contact)
         ============================================= */
 
-        /* social section moved above */
+        .social-section {
+            margin-top: 40px;
+            padding: 40px;
+            background: rgba(0, 194, 255, 0.03);
+            border: 1px solid rgba(0, 194, 255, 0.15);
+            border-radius: var(--radius-xl);
+            text-align: center;
+        }
 
         .social-section-title {
             font-family: 'Clash Display', sans-serif;
@@ -1147,17 +1085,16 @@
             font-size: 0.9rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: 1px solid var(--border-strong);
-            background: var(--surface-1);
-            color: var(--accent);
-            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 194, 255, 0.3);
+            background: rgba(0, 194, 255, 0.05);
+            color: var(--white);
         }
 
         .social-btn:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: var(--shadow-accent);
             background: var(--gradient);
-            color: #ffffff;
+            color: var(--dark-1);
             border-color: transparent;
         }
 
@@ -1193,7 +1130,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
@@ -1202,7 +1139,7 @@
 
         .btn-primary {
             background: var(--gradient);
-            color: #ffffff;
+            color: var(--dark-1);
             font-weight: 700;
             box-shadow: var(--shadow-accent);
         }
@@ -1215,7 +1152,7 @@
             color: var(--accent);
         }
 
-        .btn-outline:hover { background: var(--accent); color: #ffffff; transform: translateY(-5px); box-shadow: var(--shadow-accent); }
+        .btn-outline:hover { background: var(--accent); color: var(--dark-1); transform: translateY(-5px); box-shadow: var(--shadow-accent); }
 
         .btn-wa {
             background: #25D366;
@@ -1427,7 +1364,9 @@
     <!-- MAIN CONTENT -->
     <div class="main-content">
 
-        <!-- HOME SECTION -->
+        <!-- ================================================
+            HOME SECTION
+        ================================================ -->
         <section id="home">
             <div class="section-container">
                 <div class="hero-badge">
@@ -1465,7 +1404,9 @@
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
+        <!-- ================================================
+            ABOUT SECTION
+        ================================================ -->
         <section id="about">
             <div class="section-container">
                 <div class="section-header">
@@ -1509,7 +1450,9 @@
             </div>
         </section>
 
-        <!-- SERVICES SECTION -->
+        <!-- ================================================
+            SERVICES SECTION
+        ================================================ -->
         <section id="services">
             <div class="section-container">
                 <div class="section-header">
@@ -1556,7 +1499,9 @@
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
+        <!-- ================================================
+            PROJECTS SECTION
+        ================================================ -->
         <section id="projects">
             <div class="section-container">
                 <div class="section-header">
@@ -1582,7 +1527,9 @@
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
+        <!-- ================================================
+            CONTACT SECTION
+        ================================================ -->
         <section id="contact">
             <div class="section-container">
                 <div class="section-header">
@@ -1591,11 +1538,14 @@
                 </div>
 
                 <div class="contact-grid">
+                    <!-- Contact Info Card -->
                     <div class="contact-card">
                         <h3>{{ contact_section.info_card_title }}</h3>
 
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
                             <div class="contact-details">
                                 <h4>Location</h4>
                                 <p>{{ site.address }}</p>
@@ -1603,7 +1553,9 @@
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
                             <div class="contact-details">
                                 <h4>Phone / WhatsApp</h4>
                                 <a href="tel:{{ site.phone1|cut:' ' }}">{{ site.phone1 }}</a><br>
@@ -1614,7 +1566,9 @@
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
                             <div class="contact-details">
                                 <h4>Email</h4>
                                 <a href="mailto:{{ site.email }}">{{ site.email }}</a>
@@ -1622,7 +1576,9 @@
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
                             <div class="contact-details">
                                 <h4>Working Hours</h4>
                                 <p>{{ site.working_hours }}</p>
@@ -1635,6 +1591,7 @@
                         </div>
                     </div>
 
+                    <!-- Contact Form Card -->
                     <div class="contact-card">
                         <h3>{{ contact_section.form_card_title }}</h3>
 
@@ -1673,6 +1630,7 @@
                     </div>
                 </div>
 
+                <!-- SOCIAL MEDIA SECTION -->
                 {% if social_links %}
                 <div class="social-section">
                     <div class="social-section-title">Follow Us on Social Media</div>
@@ -1698,6 +1656,9 @@
     </a>
 
     <script>
+        // =============================================
+        // MOBILE SIDEBAR
+        // =============================================
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileSidebar = document.getElementById('mobileSidebar');
         const closeSidebar = document.getElementById('closeSidebar');
@@ -1719,6 +1680,9 @@
         closeSidebar.addEventListener('click', closeSidebarFunc);
         overlay.addEventListener('click', closeSidebarFunc);
 
+        // =============================================
+        // SMOOTH SCROLL
+        // =============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1730,6 +1694,9 @@
             });
         });
 
+        // =============================================
+        // ACTIVE NAV HIGHLIGHTING
+        // =============================================
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.desktop-nav a, .sidebar-nav a');
 
@@ -1749,6 +1716,9 @@
             });
         });
 
+        // =============================================
+        // MOUSE PARALLAX EFFECT
+        // =============================================
         document.querySelectorAll('section').forEach(section => {
             section.addEventListener('mousemove', (e) => {
                 const rect = section.getBoundingClientRect();
@@ -1759,6 +1729,9 @@
             });
         });
 
+        // =============================================
+        // WHATSAPP SEND FUNCTION
+        // =============================================
         function sendWhatsApp() {
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
@@ -1787,41 +1760,74 @@
             window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(fullMessage)}`, '_blank');
         }
 
+        // =============================================
+        // GSAP ANIMATIONS
+        // =============================================
         if (typeof gsap !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
 
             gsap.utils.toArray('.service-card').forEach((card, i) => {
                 gsap.from(card, {
-                    scrollTrigger: { trigger: card, start: 'top 80%' },
-                    opacity: 0, y: 50, duration: 0.6, delay: (i % 3) * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.6,
+                    delay: (i % 3) * 0.1,
                 });
             });
 
             gsap.utils.toArray('.project-card').forEach((card, i) => {
                 gsap.from(card, {
-                    scrollTrigger: { trigger: card, start: 'top 80%' },
-                    opacity: 0, scale: 0.9, duration: 0.6, delay: i * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                    },
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 0.6,
+                    delay: i * 0.1,
                 });
             });
 
             gsap.utils.toArray('.stat-card').forEach((card, i) => {
                 gsap.from(card, {
-                    scrollTrigger: { trigger: card, start: 'top 85%' },
-                    opacity: 0, y: 30, duration: 0.5, delay: i * 0.15,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                    },
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.5,
+                    delay: i * 0.15,
                 });
             });
 
             gsap.utils.toArray('.credential-item').forEach((item, i) => {
                 gsap.from(item, {
-                    scrollTrigger: { trigger: item, start: 'top 85%' },
-                    opacity: 0, x: 30, duration: 0.5, delay: i * 0.1,
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                    },
+                    opacity: 0,
+                    x: 30,
+                    duration: 0.5,
+                    delay: i * 0.1,
                 });
             });
 
             gsap.utils.toArray('.social-btn').forEach((btn, i) => {
                 gsap.from(btn, {
-                    scrollTrigger: { trigger: btn, start: 'top 90%' },
-                    opacity: 0, y: 20, duration: 0.4, delay: i * 0.08,
+                    scrollTrigger: {
+                        trigger: btn,
+                        start: 'top 90%',
+                    },
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                    delay: i * 0.08,
                 });
             });
         }
